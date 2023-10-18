@@ -15,7 +15,7 @@ repositories {
 
 
 dependencies {
-    implementation 'mysql:mysql-connector-java:8.0.28'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.28'
     implementation 'org.hibernate:hibernate-core:6.2.1.Final'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -30,5 +30,5 @@ test {
 
 bootJar {
     archiveBaseName = 'galactic_messenger_server'
-    destinationDirectory = file(project.projectDir)
+    destinationDirectory = file('../')
 }

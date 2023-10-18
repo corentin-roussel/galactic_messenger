@@ -1,9 +1,10 @@
-package org.example.Server.Repository;
+package org.example.Repository;
 
-import org.example.Server.Model.User;
-import org.springframework.data.repository.CrudRepository;
+import org.example.Model.UserModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+@Repository
+public interface UserRepository extends JpaRepository<UserModel, Long> {
 
-    User findById(long id);
 }

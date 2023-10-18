@@ -29,5 +29,5 @@ test {
 
 bootJar {
     archiveBaseName = 'galactic_messenger_client'
-    destinationDirectory = file(project.projectDir)
+    destinationDirectory = file('../')
 }
