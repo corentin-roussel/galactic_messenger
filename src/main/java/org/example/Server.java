@@ -11,8 +11,16 @@ public class Server {
 
 
         public Server(ServerSocket ss){
+
             this.ss = ss;
         }
+
+
+
+
+
+
+
 
     public void startServer(){
 
@@ -37,6 +45,11 @@ public class Server {
 
 
 
+
+
+
+
+
     public void initDb(){
             try(Connection connection = DriverManager.getConnection("jdbc:sqlite:galactic_messenger.db");
                 Statement statement = connection.createStatement()) {
@@ -53,6 +66,13 @@ public class Server {
     }
 
 
+
+
+
+
+
+
+
     public static void main(String[] args) throws IOException {
         ServerSocket ss = new ServerSocket(6000);
         Server server = new Server(ss);
@@ -60,6 +80,12 @@ public class Server {
         server.startServer();
 
     }
+
+
+
+
+
+
 
 
 

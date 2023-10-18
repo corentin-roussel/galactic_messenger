@@ -30,6 +30,12 @@ public class Client {
        }
    }
 
+
+
+
+
+
+
    public void sendMessage(){
         try {
             bufferedWriter.write((username));
@@ -49,6 +55,11 @@ public class Client {
    }
 
 
+
+
+
+
+
    public void listenForMessage(){
         new Thread(new Runnable() {
             @Override
@@ -65,6 +76,11 @@ public class Client {
             }
         }).start();
    }
+
+
+
+
+
 
    public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
        try {
@@ -84,6 +100,10 @@ public class Client {
        }
    }
 
+
+
+
+
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Entrez votre pseudo : ");
@@ -93,13 +113,27 @@ public class Client {
         Socket socket = new Socket("localhost", 6000);
         Client client = new Client(socket, username, password);
 
+        client.bufferedWriter.write(username);
+        client.bufferedWriter.newLine();
+        client.bufferedWriter.write(password);
+        client.bufferedWriter.newLine();
+        client.bufferedWriter.flush();
+
+
         // Démarrer un thread pour écouter les messages du serveur
         Thread listenThread = new Thread(client::listenForMessage);
         listenThread.start();
 
         // Démarrer un thread pour envoyer des messages
         Thread sendThread = new Thread(client::sendMessage);
-        sendThread.start();    }
+        sendThread.start();
+    }
+
+
+
+
+
+
 
    }
 

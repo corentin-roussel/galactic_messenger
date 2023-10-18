@@ -35,6 +35,12 @@ public class ClientHandler implements Runnable{
         }
     }
 
+
+
+
+
+
+
     public ClientHandler(Socket socket){
         try {
             this.socket = socket;
@@ -52,6 +58,13 @@ public class ClientHandler implements Runnable{
     }
 
 
+
+
+
+
+
+
+
     @Override
     public void run() {
         String messageFromClient;
@@ -67,6 +80,13 @@ public class ClientHandler implements Runnable{
         }
     }
 
+
+
+
+
+
+
+
     public void broadcastMessage(String messageToSend){
         for(ClientHandler clientHandler : clientHandlers){
             try {
@@ -80,12 +100,25 @@ public class ClientHandler implements Runnable{
             }
         }
 
+
+
+
+
+
+
     }
 
     public void removeClientHandler(){
         clientHandlers.remove(this);
         broadcastMessage("INFOS: " + clientUsername + " à quitté le chat");
     }
+
+
+
+
+
+
+
 
     public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
         removeClientHandler();
@@ -105,4 +138,9 @@ public class ClientHandler implements Runnable{
             err.printStackTrace();
         }
     }
+
+
+
+
+
 }
