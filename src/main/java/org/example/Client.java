@@ -106,21 +106,54 @@ public class Client {
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Bonjour, veuillez vous connecter (1) ou vous enregistrer (2) pour accéder au chat");
+        int choice = Integer.parseInt(scanner.nextLine());
+
+        if (choice == 1) {
+            String[] userInfo = getUserInfo(scanner);
+            if (userInfo != null) {
+                Client client = connectToServer(userInfo);
+                if (client != null) {
+                    startThreads(client);
+                }
+            }
+        } else if (choice == 2) {
+            String[] userInfo = getUserInfo(scanner);
+            if (userInfo != null) {
+                System.out.println("Enregistrement réussi !");
+                Client client = connectToServer(userInfo);
+                if (client != null) {
+                    startThreads(client);
+                }
+            }
+        }
+    }
+
+    public static String[] getUserInfo(Scanner scanner) {
         System.out.println("Entrez votre pseudo : ");
         String username = scanner.nextLine();
-        System.out.println("Entre votre mot de passe: ");
+        System.out.println("Entrez votre mot de passe : ");
         String password = scanner.nextLine();
-        Socket socket = new Socket("localhost", 6000);
-        Client client = new Client(socket, username, password);
+        return new String[]{username, password};
+    }
 
-        client.bufferedWriter.write(username);
-        client.bufferedWriter.newLine();
-        client.bufferedWriter.write(password);
-        client.bufferedWriter.newLine();
-        client.bufferedWriter.flush();
+    public static Client connectToServer(String[] userInfo) {
+        try {
+            Socket socket = new Socket("localhost", 6000);
+            Client client = new Client(socket, userInfo[0], userInfo[1]);
+            client.bufferedWriter.write(userInfo[0]);
+            client.bufferedWriter.newLine();
+            client.bufferedWriter.write(userInfo[1]);
+            client.bufferedWriter.newLine();
+            client.bufferedWriter.flush();
+            return client;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-
-        // Démarrer un thread pour écouter les messages du serveur
+    public static void startThreads(Client client) {
         Thread listenThread = new Thread(client::listenForMessage);
         listenThread.start();
 
@@ -131,11 +164,7 @@ public class Client {
 
 
 
-
-
-
-
-   }
+}
 
 
 
