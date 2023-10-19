@@ -2,7 +2,6 @@ package org.example.Services;
 
 import java.net.*;
 import java.sql.*;
-import java.util.Hashtable;
 import java.io.*;
 import java.net.InetAddress;
 
@@ -33,13 +32,16 @@ public class ServerService {
 
         try {
             InetAddress ip = InetAddress.getLocalHost();
-            String hostAdress = ip.getHostAddress();
+            String hostAdress = "127.0.0.1";
             System.out.println("Adresse ip du serveur : " + hostAdress +":"+ ss.getLocalPort());
 
             while(!ss.isClosed()){
                 Socket socket = ss.accept();
                 System.out.println("Nouvelle connection !" );
 
+                ClientHandlerService clientHandlerService =new ClientHandlerService(socket);
+                Thread thread = new Thread(clientHandlerService);
+                thread.start();
             }
         }catch (IOException err){
             err.printStackTrace();

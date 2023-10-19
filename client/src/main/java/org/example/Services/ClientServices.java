@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.io.*;
 import java.net.InetAddress;
 import java.util.Scanner;
+import org.example.Services.ClientServices;
 public class ClientServices {
 
     private Socket socket;
@@ -62,17 +63,14 @@ public class ClientServices {
 
 
     public void listenForMessage(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String messageFromGroupChat;
-                while (socket.isConnected()){
-                    try {
-                        messageFromGroupChat = bufferedReader.readLine();
-                        System.out.println(messageFromGroupChat);
-                    }catch (IOException err){
-                        closeEverything(socket, bufferedReader, bufferedWriter);
-                    }
+        new Thread(() -> {
+            String messageFromGroupChat;
+            while (socket.isConnected()){
+                try {
+                    messageFromGroupChat = bufferedReader.readLine();
+                    System.out.println(messageFromGroupChat);
+                }catch (IOException err){
+                    closeEverything(socket, bufferedReader, bufferedWriter);
                 }
             }
         }).start();
@@ -117,7 +115,7 @@ public class ClientServices {
 
     public static ClientServices connectToServer(String[] userInfo) {
         try {
-            Socket socket = new Socket("localhost", 3000);
+            Socket socket = new Socket("127.0.0.1", 3000);
             ClientServices client = new ClientServices(socket, userInfo[0], userInfo[1]);
             client.bufferedWriter.write(userInfo[0]);
             client.bufferedWriter.newLine();
@@ -134,7 +132,6 @@ public class ClientServices {
     public static void startThreads(ClientServices client) {
         Thread listenThread = new Thread(client::listenForMessage);
         listenThread.start();
-
         // Démarrer un thread pour envoyer des messages
         Thread sendThread = new Thread(client::sendMessage);
         sendThread.start();

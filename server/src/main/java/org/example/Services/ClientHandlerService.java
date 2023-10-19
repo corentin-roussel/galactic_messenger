@@ -1,7 +1,5 @@
 package org.example.Services;
 
-import org.hibernate.HibernateException;
-
 import java.io.*;
 import java.net.Socket;
 import java.sql.Connection;
@@ -22,9 +20,6 @@ public class ClientHandlerService implements Runnable{
 
     private String userPassword;
 
-    public ClientHandlerService(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     public void run() {
@@ -59,9 +54,14 @@ public class ClientHandlerService implements Runnable{
     }
 
     public void insertClientsInfosInTable(String userUsername, String userPassword) {
-        try {
-            this.userService.saveUsers(userUsername, userPassword);
-        } catch (HibernateException e) {
+        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:galactic_messenger.db")) {
+            String query = "INSERT INTO users (username, password) VALUES (?, ?)";
+            try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, userUsername);
+                preparedStatement.setString(2, userPassword);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

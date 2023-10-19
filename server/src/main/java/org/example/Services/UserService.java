@@ -24,7 +24,7 @@ public class UserService {
 
 
 
-    public void saveUsers(@Qualifier("userRepository") String username, String password) {
+    public void saveUsers(String username, String password) {
         userRepository.save(new UserModel(username, password));
     }
 }
