@@ -9,18 +9,32 @@ import java.net.InetAddress;
 public class ServerService {
 
     private ServerSocket ss;
-    private String serverIp;
 
-    public ServerService(String serverIp, ServerSocket ss){
-        this.serverIp = serverIp;
+    public ServerService(ServerSocket ss){
         this.ss = ss;
     }
 
+
+    public void initDb(){
+        try(Connection connection = DriverManager.getConnection("jdbc:sqlite:galactic_messenger.db");
+            Statement statement = connection.createStatement()) {
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS users (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "username TEXT NOT NULL," +
+                    "password TEXT NOT NULL)";
+            statement.executeUpdate(createTableSQL);
+            System.out.println("table crée avec succées");
+
+        }catch (SQLException err){
+            err.printStackTrace();
+        }
+    }
     public void startServer(){
 
         try {
-            String hostAddress = serverIp;
-            System.out.println("Adresse ip du serveur : " + hostAddress +":"+ ss.getLocalPort());
+            InetAddress ip = InetAddress.getLocalHost();
+            String hostAdress = ip.getHostAddress();
+            System.out.println("Adresse ip du serveur : " + hostAdress +":"+ ss.getLocalPort());
 
             while(!ss.isClosed()){
                 Socket socket = ss.accept();

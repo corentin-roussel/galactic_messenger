@@ -2,8 +2,8 @@ package org.example.Services;
 
 import org.example.Model.UserModel;
 import org.example.Repository.UserRepository;
-import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +22,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void saveUsers(String username, String password) {
+
+
+    public void saveUsers(@Qualifier("userRepository") String username, String password) {
         userRepository.save(new UserModel(username, password));
     }
 }

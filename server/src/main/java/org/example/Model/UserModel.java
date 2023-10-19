@@ -1,8 +1,8 @@
 package org.example.Model;
 
 import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 @Entity
 @Table(name = "users")
@@ -20,13 +20,13 @@ public class UserModel {
 
 
 
+    protected UserModel() {};
 
 
     public UserModel(String username, String password) {
         this.username = username;
         this.password = password;
     }
-    protected UserModel() {};
 
     public String toString() {
         return String.format(

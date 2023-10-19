@@ -4,6 +4,9 @@ import org.hibernate.HibernateException;
 
 import java.io.*;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -25,8 +28,19 @@ public class ClientHandlerService implements Runnable{
 
     @Override
     public void run() {
+        String messageFromClient;
 
+        while (socket.isConnected()){
+            try {
+                messageFromClient = bufferedReader.readLine();
+                broadcastMessage(messageFromClient);
+            }catch (IOException err){
+                closeEverything(socket, bufferedReader, bufferedWriter);
+                break;
+            }
+        }
     }
+
 
     public ClientHandlerService(Socket socket){
         try {
@@ -47,7 +61,7 @@ public class ClientHandlerService implements Runnable{
     public void insertClientsInfosInTable(String userUsername, String userPassword) {
         try {
             this.userService.saveUsers(userUsername, userPassword);
-        }catch(HibernateException e) {
+        } catch (HibernateException e) {
             throw new RuntimeException(e);
         }
     }

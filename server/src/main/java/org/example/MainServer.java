@@ -8,11 +8,8 @@ public class MainServer {
 
 
     public static void MainServer(String[] args) throws IOException {
-        String hostname = args[0];
-        ServerSocket ss = new ServerSocket(Integer.parseInt(args[1]));
-
-        ServerService server = new ServerService(hostname, ss);
-
+        ServerSocket ss = new ServerSocket(Integer.parseInt(args[0]));
+        ServerService server = new ServerService(ss);
         server.startServer();
     }
 
