@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ClientHandlerService implements Runnable{
 
     public UserService userService;
-    public static ArrayList<ClientHandlerService> clientHandlers = new ArrayList<>(); // Garde une trace de tout les clients connectés pour que tout le monde est accées aux messages
+    public static ArrayList<ClientHandlerService> clientHandlers = new ArrayList<>(); // !!!!! PEUT ETRE CHANGER CA EN HASMAP POUR L'AUTHENTIFICATION !!!!! Garde une trace de tout les clients connectés pour que tout le monde est accées aux messages
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
