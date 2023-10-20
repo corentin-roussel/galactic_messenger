@@ -5,12 +5,15 @@ import java.sql.*;
 import java.io.*;
 import java.net.InetAddress;
 
-public class ServerService {
+public class ServerService{
 
-    private ServerSocket ss;
+    private static ServerSocket serverSocket;
+    private Socket clientSocket;
+    private PrintWriter out;
+    private BufferedReader in;
 
-    public ServerService(ServerSocket ss){
-        this.ss = ss;
+    public ServerService(ServerSocket serverSocket){
+        this.serverSocket = serverSocket;
     }
 
 
@@ -22,27 +25,28 @@ public class ServerService {
                     "username TEXT NOT NULL," +
                     "password TEXT NOT NULL)";
             statement.executeUpdate(createTableSQL);
-            System.out.println("table crée avec succées");
-
+            System.out.println("Table crée avec succées");
         }catch (SQLException err){
             err.printStackTrace();
         }
     }
+
     public void startServer(){
 
         try {
-            InetAddress ip = InetAddress.getLocalHost();
             String hostAdress = "127.0.0.1";
-            System.out.println("Adresse ip du serveur : " + hostAdress +":"+ ss.getLocalPort());
+            System.out.println("Adresse ip du serveur : " + hostAdress +":"+ serverSocket.getLocalPort());
 
-            while(!ss.isClosed()){
-                Socket socket = ss.accept();
+
+            while(!serverSocket.isClosed()) {
+                clientSocket = serverSocket.accept();
                 System.out.println("Nouvelle connection !" );
+                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-                ClientHandlerService clientHandlerService =new ClientHandlerService(socket);
-                Thread thread = new Thread(clientHandlerService);
-                thread.start();
             }
+
+
         }catch (IOException err){
             err.printStackTrace();
         }
