@@ -47,7 +47,7 @@ public class ClientServices {
             Scanner scanner = new Scanner(System.in);
             while(socket.isConnected()){
                 String messageToSend = scanner.nextLine();
-                bufferedWriter.write(username + ": " + messageToSend);
+                bufferedWriter.write(messageToSend);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
@@ -106,9 +106,9 @@ public class ClientServices {
 
 
     public static String[] getUserInfo(Scanner scanner) {
-        System.out.println("Entrez votre pseudo : ");
+        System.out.println("Username : ");
         String username = scanner.nextLine();
-        System.out.println("Entrez votre mot de passe : ");
+        System.out.println("Password : ");
         String password = scanner.nextLine();
         return new String[]{username, password};
     }
@@ -118,8 +118,6 @@ public class ClientServices {
             Socket socket = new Socket("127.0.0.1", 3000);
             ClientServices client = new ClientServices(socket, userInfo[0], userInfo[1]);
             client.bufferedWriter.write(userInfo[0]);
-            client.bufferedWriter.newLine();
-            client.bufferedWriter.write(userInfo[1]);
             client.bufferedWriter.newLine();
             client.bufferedWriter.flush();
             return client;

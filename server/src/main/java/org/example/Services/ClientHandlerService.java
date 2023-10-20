@@ -46,7 +46,7 @@ public class ClientHandlerService implements Runnable{
             this.userPassword = bufferedReader.readLine();
             insertClientsInfosInTable(userUsername, userPassword);
             clientHandlers.add(this);
-            broadcastMessage("INFOS: " + userUsername + " à rejoint le chat");
+            broadcastMessage("INFOS: " + userUsername + " à rejoint le chat en feu");
 
         }catch (IOException err){
             closeEverything(socket, bufferedReader, bufferedWriter);
@@ -66,13 +66,20 @@ public class ClientHandlerService implements Runnable{
         }
     }
 
-    public void broadcastMessage(String messageToSend) {
+    public void broadcastMessage(String messageToSend) { // SEPARER LA METHODE EN DEUX BROADCASTMESSAGE ET BROADCASTSELFMESSAGE
         for (ClientHandlerService clientHandler : clientHandlers) {
             try {
                 if (!clientHandler.userUsername.equals(userUsername)) {
-                    clientHandler.bufferedWriter.write(messageToSend);
+                    clientHandler.bufferedWriter.write(userUsername + ": " +messageToSend);
                     clientHandler.bufferedWriter.newLine();
                     clientHandler.bufferedWriter.flush();
+                }
+
+                if (clientHandler.userUsername.equals(userUsername)){
+                    clientHandler.bufferedWriter.write("moi: " +messageToSend);
+                    clientHandler.bufferedWriter.newLine();
+                    clientHandler.bufferedWriter.flush();
+
                 }
             } catch (IOException err) {
                 closeEverything(socket, bufferedReader, bufferedWriter);
@@ -104,4 +111,6 @@ public class ClientHandlerService implements Runnable{
         clientHandlers.remove(this);
         broadcastMessage("INFOS: " + userUsername + " à quitté le chat");
     }
+
+
 }

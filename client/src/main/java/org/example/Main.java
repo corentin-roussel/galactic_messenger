@@ -16,10 +16,10 @@ public class Main {
         SpringApplication.run(Main.class, args);
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Bonjour, veuillez vous connecter (1) ou vous enregistrer (2) pour accéder au chat");
-        int choice = Integer.parseInt(scanner.nextLine());
+        System.out.println("Bonjour, voulez-vous vous connecter ou vous inscrire ?\n /login -> Connexion \n /register -> Inscription");
+        String choice = (scanner.nextLine());
 
-        if (choice == 1) {
+        if (choice.contains("/login")) {
             String[] userInfo = ClientServices.getUserInfo(scanner);
             if (userInfo != null) {
                 ClientServices client = ClientServices.connectToServer(userInfo);
@@ -27,7 +27,7 @@ public class Main {
                     ClientServices.startThreads(client);
                 }
             }
-        } else if (choice == 2) {
+        } else if (choice.contains("/register")) {
             String[] userInfo = ClientServices.getUserInfo(scanner);
             if (userInfo != null) {
                 System.out.println("Enregistrement réussi !");
