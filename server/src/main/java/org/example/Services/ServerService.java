@@ -1,5 +1,7 @@
 package org.example.Services;
 
+import org.example.Model.UserModel;
+
 import java.net.*;
 import java.sql.*;
 import java.io.*;
@@ -37,7 +39,7 @@ public class ServerService {
 
             while(!ss.isClosed()){
                 Socket socket = ss.accept();
-                System.out.println("Nouvelle connection !" );
+                System.out.println("\u001B[32m" + "Nouvel connection !" + "\u001B[0m");
 
                 ClientHandlerService clientHandlerService =new ClientHandlerService(socket);
                 Thread thread = new Thread(clientHandlerService);

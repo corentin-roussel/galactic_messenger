@@ -35,7 +35,7 @@ public class Main {
                 case "/register":
                     String[] registerInfo = ClientServices.getUserInfo(scanner);
                     if (registerInfo != null) {
-                        System.out.println("Enregistrement réussi !");
+                        System.out.println("\u001B[32m" + "Enregistrement réussi !" + "\u001B[0m");
                         ClientServices client = ClientServices.connectToServer(registerInfo);
                         if (client != null) {
                             ClientServices.startThreads(client);
@@ -45,12 +45,12 @@ public class Main {
                     break;
 
                 case "/exit":
-                    System.out.println("Aurevoir !");
+                    System.out.println("\u001B[32m" + "Aurevoir !" + "\u001B[0m");
                     validChoice = true;
                     break;
 
                 default:
-                    System.out.println("Choix invalide.");
+                    System.out.println("\u001B[31m" + "Choix invalide!" + "\u001B[0m");
 
                     break;
             }
