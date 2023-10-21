@@ -1,5 +1,7 @@
 package org.example.Services;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.io.*;
 import java.net.Socket;
 import java.sql.Connection;
@@ -53,12 +55,28 @@ public class ClientHandlerService implements Runnable{
         }
     }
 
+    public static String hashPassword(String password) {
+        // Générer un salt BCrypt sécurisé
+        String salt = BCrypt.gensalt();
+
+        // Hacher le mot de passe avec le salt
+        String hashedPassword = BCrypt.hashpw(password, salt);
+
+        return hashedPassword;
+    }
+
+    public static boolean checkPassword(String password, String hashedPassword) {
+        // Vérifier si le mot de passe correspond au hachage stocké
+        return BCrypt.checkpw(password, hashedPassword);
+    }
+
     public void insertClientsInfosInTable(String userUsername, String userPassword) {
         try(Connection connection = DriverManager.getConnection("jdbc:sqlite:galactic_messenger.db")) {
+            String hashedPassword = hashPassword(userPassword);
             String query = "INSERT INTO users (username, password) VALUES (?, ?)";
             try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, userUsername);
-                preparedStatement.setString(2, userPassword);
+                preparedStatement.setString(2, hashedPassword);
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
