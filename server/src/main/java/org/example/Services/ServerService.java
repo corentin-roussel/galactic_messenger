@@ -1,6 +1,7 @@
 package org.example.Services;
 
 import org.example.Model.UserModel;
+import org.example.Repository.UserRepository;
 
 import java.net.*;
 import java.sql.*;
@@ -16,7 +17,9 @@ public class ServerService {
     }
 
 
-    public void initDb(){
+
+    public void initDb() {
+
         try(Connection connection = DriverManager.getConnection("jdbc:sqlite:galactic_messenger.db");
             Statement statement = connection.createStatement()) {
             String createTableSQL = "CREATE TABLE IF NOT EXISTS users (" +
@@ -24,7 +27,7 @@ public class ServerService {
                     "username TEXT NOT NULL," +
                     "password TEXT NOT NULL)";
             statement.executeUpdate(createTableSQL);
-            System.out.println("table crée avec succées");
+            System.out.println("\u001B[32m" + "Table crée avec succées !" + "\u001B[0m");
 
         }catch (SQLException err){
             err.printStackTrace();
@@ -37,10 +40,10 @@ public class ServerService {
             String hostAdress = "127.0.0.1";
             System.out.println("Adresse ip du serveur : " + hostAdress +":"+ ss.getLocalPort());
 
+
             while(!ss.isClosed()){
                 Socket socket = ss.accept();
                 System.out.println("\u001B[32m" + "Nouvel connection !" + "\u001B[0m");
-
                 ClientHandlerService clientHandlerService =new ClientHandlerService(socket);
                 Thread thread = new Thread(clientHandlerService);
                 thread.start();

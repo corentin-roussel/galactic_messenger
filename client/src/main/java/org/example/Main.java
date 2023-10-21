@@ -18,13 +18,23 @@ public class Main {
 
         while (!validChoice) {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Bonjour, voulez-vous vous connecter ou vous inscrire ?\n\n" +"\u001B[34m" + "/login" + "\u001B[0m" + " -> Connexion\n" + "\u001B[34m" + "/register"  + "\u001B[0m" + "-> Inscription\n" + "\u001B[34m" +"/exit" +"\u001B[0m" + " -> Quitter \n");
+
+            System.out.println("Bonjour, voulez-vous vous connecter ou vous inscrire ?\n\n"
+
+                    +"\u001B[34m" + "/login 'username' 'password' " + "\u001B[0m" + " -> Connexion\n" + "\u001B[34m"
+
+                    + "/register 'username' 'password' "  + "\u001B[0m" + "-> Inscription\n"
+
+                    + "\u001B[34m" +"/exit" +"\u001B[0m" + " -> Quitter \n"
+
+                    + "\u001B[34m" + "/help" +"\u001B[0m"+ " -> to see list of available commands" );
+
             String choice = scanner.nextLine();
             switch (choice) {
                 case "/login":
                     String[] loginInfo = ClientServices.getUserInfo(scanner);
                     if (loginInfo != null) {
-                        ClientServices client = ClientServices.connectToServer(loginInfo);
+                        ClientServices client = ClientServices.connectToServer(loginInfo,  args);
                         if (client != null) {
                             ClientServices.startThreads(client);
                         }
@@ -36,7 +46,7 @@ public class Main {
                     String[] registerInfo = ClientServices.getUserInfo(scanner);
                     if (registerInfo != null) {
                         System.out.println("\u001B[32m" + "Enregistrement réussi !" + "\u001B[0m");
-                        ClientServices client = ClientServices.connectToServer(registerInfo);
+                        ClientServices client = ClientServices.connectToServer(registerInfo, args);
                         if (client != null) {
                             ClientServices.startThreads(client);
                         }

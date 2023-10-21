@@ -113,9 +113,10 @@ public class ClientServices {
         return new String[]{username, password};
     }
 
-    public static ClientServices connectToServer(String[] userInfo) {
+    public static ClientServices connectToServer(String[] userInfo, String[] args) {
         try {
-            Socket socket = new Socket("127.0.0.1", 3000);
+            String ipArgs = args[0];
+            Socket socket = new Socket(ipArgs, Integer.parseInt(args[1]));
             ClientServices client = new ClientServices(socket, userInfo[0], userInfo[1]);
             client.bufferedWriter.write(userInfo[0]);
             client.bufferedWriter.newLine();

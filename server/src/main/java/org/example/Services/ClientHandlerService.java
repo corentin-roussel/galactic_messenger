@@ -1,5 +1,6 @@
 package org.example.Services;
 
+import org.example.Model.UserModel;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.*;
@@ -144,6 +145,15 @@ public class ClientHandlerService implements Runnable{
     public void removeClientHandler(){
         clientHandlers.remove(this);
         broadcastMessage("INFOS: " + userUsername + " à quitté le chat");
+    }
+
+    public void displayAllUsers(){
+        ArrayList<UserModel> users = (ArrayList<UserModel>) this.userService.findAllUsers();
+
+        System.out.println("Liste des utilisateurs :");
+        users.forEach(user -> {
+            System.out.println(user.getId() + " * " + user.getUsername() + " * " + user.getPassword());
+        });
     }
 
 
