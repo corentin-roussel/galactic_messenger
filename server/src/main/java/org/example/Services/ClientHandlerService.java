@@ -48,7 +48,12 @@ public class ClientHandlerService implements Runnable{
             this.userPassword = bufferedReader.readLine();
             insertClientsInfosInTable(userUsername, userPassword);
             clientHandlers.add(this);
-            broadcastMessage("INFOS: " + userUsername + " à rejoint le chat en feu");
+            for (ClientHandlerService clientHandler : clientHandlers) {
+                if (!clientHandler.userUsername.equals(userUsername)) {
+                    broadcastMessage("INFOS: " + userUsername + " à rejoint le chat en feu");
+                }else broadcastSelfMessage("INFOS: Vous avez rejoint le chat vous pouvez commencer à discuter avec les autres personnes connectées");
+            }
+
 
         }catch (IOException err){
             closeEverything(socket, bufferedReader, bufferedWriter);
@@ -93,12 +98,23 @@ public class ClientHandlerService implements Runnable{
                     clientHandler.bufferedWriter.flush();
                 }
 
-                if (clientHandler.userUsername.equals(userUsername)){
-                    clientHandler.bufferedWriter.write("moi: " +messageToSend);
+
+            } catch (IOException err) {
+                closeEverything(socket, bufferedReader, bufferedWriter);
+            }
+        }
+    }
+
+    public void  broadcastSelfMessage(String messageToSend) {
+        for (ClientHandlerService clientHandler : clientHandlers) {
+            try {
+                if (clientHandler.userUsername.equals(userUsername)) {
+                    clientHandler.bufferedWriter.write("moi: " + messageToSend);
                     clientHandler.bufferedWriter.newLine();
                     clientHandler.bufferedWriter.flush();
-
                 }
+
+
             } catch (IOException err) {
                 closeEverything(socket, bufferedReader, bufferedWriter);
             }

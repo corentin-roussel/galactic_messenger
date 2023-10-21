@@ -68,7 +68,7 @@ public class ClientServices {
             while (socket.isConnected()){
                 try {
                     messageFromGroupChat = bufferedReader.readLine();
-                    System.out.println(messageFromGroupChat);
+                    System.out.println("\u001B[32m"+ messageFromGroupChat + "\u001B[0m");
                 }catch (IOException err){
                     closeEverything(socket, bufferedReader, bufferedWriter);
                 }
@@ -106,9 +106,9 @@ public class ClientServices {
 
 
     public static String[] getUserInfo(Scanner scanner) {
-        System.out.println("Username : ");
+        System.out.println("\u001B[34m"+"Username : "+ "\u001B[0m");
         String username = scanner.nextLine();
-        System.out.println("Password : ");
+        System.out.println("\u001B[34m"+"Password : "+ "\u001B[0m");
         String password = scanner.nextLine();
         return new String[]{username, password};
     }
