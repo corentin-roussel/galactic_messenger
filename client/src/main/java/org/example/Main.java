@@ -18,7 +18,7 @@ public class Main {
 
         while (!validChoice) {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Bonjour, voulez-vous vous connecter ou vous inscrire ?\n /login -> Connexion \n /register -> Inscription \n /exit -> Quitter");
+            System.out.println("Bonjour, voulez-vous vous connecter ou vous inscrire ?\n\n" +"\u001B[34m" + "/login" + "\u001B[0m" + " -> Connexion\n" + "\u001B[34m" + "/register"  + "\u001B[0m" + "-> Inscription\n" + "\u001B[34m" +"/exit" +"\u001B[0m" + " -> Quitter \n");
             String choice = scanner.nextLine();
             switch (choice) {
                 case "/login":

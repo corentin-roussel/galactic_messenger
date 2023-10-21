@@ -47,7 +47,7 @@ public class ClientServices {
             Scanner scanner = new Scanner(System.in);
             while(socket.isConnected()){
                 String messageToSend = scanner.nextLine();
-                bufferedWriter.write(messageToSend);
+                bufferedWriter.write("\u001B[33m" + messageToSend + "\u001B[0m");
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
@@ -68,7 +68,7 @@ public class ClientServices {
             while (socket.isConnected()){
                 try {
                     messageFromGroupChat = bufferedReader.readLine();
-                    System.out.println("\u001B[32m"+ messageFromGroupChat + "\u001B[0m");
+                    System.out.println(messageFromGroupChat);
                 }catch (IOException err){
                     closeEverything(socket, bufferedReader, bufferedWriter);
                 }
@@ -106,9 +106,9 @@ public class ClientServices {
 
 
     public static String[] getUserInfo(Scanner scanner) {
-        System.out.println("\u001B[34m"+"Username : "+ "\u001B[0m");
+        System.out.println("\u001B[34m"+"\nUsername : "+ "\u001B[0m");
         String username = scanner.nextLine();
-        System.out.println("\u001B[34m"+"Password : "+ "\u001B[0m");
+        System.out.println("\u001B[34m"+"\nPassword : "+ "\u001B[0m");
         String password = scanner.nextLine();
         return new String[]{username, password};
     }

@@ -50,7 +50,7 @@ public class ClientHandlerService implements Runnable{
             clientHandlers.add(this);
             for (ClientHandlerService clientHandler : clientHandlers) {
                 if (!clientHandler.userUsername.equals(userUsername)) {
-                    broadcastMessage("INFOS: " + userUsername + " à rejoint le chat en feu");
+                    broadcastMessage("INFOS: " + userUsername + " à rejoint le chat");
                 }else broadcastSelfMessage("INFOS: Vous avez rejoint le chat vous pouvez commencer à discuter avec les autres personnes connectées");
             }
 
@@ -93,7 +93,7 @@ public class ClientHandlerService implements Runnable{
         for (ClientHandlerService clientHandler : clientHandlers) {
             try {
                 if (!clientHandler.userUsername.equals(userUsername)) {
-                    clientHandler.bufferedWriter.write(userUsername + ": " +messageToSend);
+                    clientHandler.bufferedWriter.write("\u001B[34m" +userUsername + "\u001B[0m" + ": " + "\u001B[35m" +messageToSend + "\u001B[0m");
                     clientHandler.bufferedWriter.newLine();
                     clientHandler.bufferedWriter.flush();
                 }
@@ -109,7 +109,7 @@ public class ClientHandlerService implements Runnable{
         for (ClientHandlerService clientHandler : clientHandlers) {
             try {
                 if (clientHandler.userUsername.equals(userUsername)) {
-                    clientHandler.bufferedWriter.write("moi: " + messageToSend);
+                    clientHandler.bufferedWriter.write("\u001B[34m" + "Moi" + "\u001B[0m" + ": " + "\u001B[35m" +messageToSend + "\u001B[0m");
                     clientHandler.bufferedWriter.newLine();
                     clientHandler.bufferedWriter.flush();
                 }
