@@ -14,20 +14,12 @@ public class Main {
 
     public static void main(String[] args) {
         Boolean validChoice = false;
-
+        System.out.println("hi, Welcome on Galactic_Messenger !\n");
 
         while (!validChoice) {
             Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Bonjour, voulez-vous vous connecter ou vous inscrire ?\n\n"
-
-                    +"\u001B[34m" + "/login 'username' 'password' " + "\u001B[0m" + " -> Connexion\n" + "\u001B[34m"
-
-                    + "/register 'username' 'password' "  + "\u001B[0m" + "-> Inscription\n"
-
-                    + "\u001B[34m" +"/exit" +"\u001B[0m" + " -> Quitter \n"
-
-                    + "\u001B[34m" + "/help" +"\u001B[0m"+ " -> to see list of available commands" );
+            System.out.println("\u001B[34m" + "/help" +"\u001B[0m"+ " -> to see list of available commands" );
 
             String choice = scanner.nextLine();
             switch (choice) {
@@ -45,7 +37,7 @@ public class Main {
                 case "/register":
                     String[] registerInfo = ClientServices.getUserInfo(scanner);
                     if (registerInfo != null) {
-                        System.out.println("\u001B[32m" + "Enregistrement réussi !" + "\u001B[0m");
+                        System.out.println("\u001B[32m" + "Registered successfully !" + "\u001B[0m");
                         ClientServices client = ClientServices.connectToServer(registerInfo, args);
                         if (client != null) {
                             ClientServices.startThreads(client);
@@ -55,12 +47,23 @@ public class Main {
                     break;
 
                 case "/exit":
-                    System.out.println("\u001B[32m" + "Aurevoir !" + "\u001B[0m");
+                    System.out.println("\u001B[32m" + "Good bye See you soon !" + "\u001B[0m");
                     validChoice = true;
                     break;
 
+                case "/help":
+                    System.out.println("\u001B[32m" + "List of available commands : " + "\u001B[0m" +"\n");
+
+                    System.out.println("\u001B[37m" + "/login 'username' 'password' " + "\u001B[0m" + " -> Connexion\n" + "\u001B[37m"
+
+                            + "/register 'username' 'password' "  + "\u001B[0m" + "-> Inscription\n"
+
+                            + "\u001B[37m" +"/exit" +"\u001B[0m" + " -> Quitter \n");
+
+                    break;
+
                 default:
-                    System.out.println("\u001B[31m" + "Choix invalide!" + "\u001B[0m");
+                    System.out.println("\u001B[31m" + "Invalid choice !" + "\u001B[0m");
 
                     break;
             }

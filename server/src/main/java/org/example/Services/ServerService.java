@@ -27,7 +27,7 @@ public class ServerService {
                     "username TEXT NOT NULL," +
                     "password TEXT NOT NULL)";
             statement.executeUpdate(createTableSQL);
-            System.out.println("\u001B[32m" + "Table crée avec succées !" + "\u001B[0m");
+            System.out.println("\u001B[32m" + "Table successfully created !" + "\u001B[0m");
 
         }catch (SQLException err){
             err.printStackTrace();
@@ -38,12 +38,12 @@ public class ServerService {
         try {
             InetAddress ip = InetAddress.getLocalHost();
             String hostAdress = "127.0.0.1";
-            System.out.println("Adresse ip du serveur : " + hostAdress +":"+ ss.getLocalPort());
+            System.out.println("Server IP address : " +"\u001B[37m"+ hostAdress +":"+ ss.getLocalPort() + "\u001B[0m");
 
 
             while(!ss.isClosed()){
                 Socket socket = ss.accept();
-                System.out.println("\u001B[32m" + "Nouvel connection !" + "\u001B[0m");
+                System.out.println("\u001B[32m" + "New connection !" + "\u001B[0m");
                 ClientHandlerService clientHandlerService =new ClientHandlerService(socket);
                 Thread thread = new Thread(clientHandlerService);
                 thread.start();
