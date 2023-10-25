@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="galactic_messenger" uuid="046df0de-1cc6-4426-a476-d1e0f25525e3">
+    <data-source source="LOCAL" name="galactic_database" uuid="477447b8-0452-41f8-b11b-eb45fb7d7398">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/galactic_messenger.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\33677\Desktop\LA_PLATEFORME\galactic_messenger\chat\galactic_database.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>

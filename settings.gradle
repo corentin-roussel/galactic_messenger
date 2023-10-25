@@ -1,4 +1,0 @@
-rootProject.name = 'galactic_messenger'
-
-include 'client', 'server'
-
