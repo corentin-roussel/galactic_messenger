@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/chat.iml" filepath="$PROJECT_DIR$/chat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/chat.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/chat.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/chat.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/chat.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/chat.app.test.iml" filepath="$PROJECT_DIR$/.idea/modules/app/chat.app.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/galactic_messenger.iml" filepath="$PROJECT_DIR$/.idea/galactic_messenger.iml" />
     </modules>
   </component>
