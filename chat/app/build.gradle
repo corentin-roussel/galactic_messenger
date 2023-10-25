@@ -1,0 +1,60 @@
+plugins {
+    id 'application'
+    id 'java'
+}
+
+group = 'org.NilsCorentin'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
+    implementation 'org.mindrot:jbcrypt:0.4'
+
+}
+
+task clientJar(type: Jar) {
+    archiveFileName.set("galactic_messenger_client.jar")
+    destinationDirectory.set(file("../"))
+    manifest {
+        attributes 'Main-Class': 'org.NilsCorentin.client.MainClient'
+    }
+    from sourceSets.main.output
+    dependsOn configurations.runtimeClasspath
+    configurations.runtimeClasspath.each { file ->
+        from zipTree(file)
+    }
+    archiveClassifier = 'GalacticMessenger-all.jar'
+}
+
+task serverJar(type: Jar) {
+    archiveFileName.set("galactic_messenger_server.jar")
+    destinationDirectory.set(file("../"))
+    manifest {
+        attributes 'Main-Class': 'org.NilsCorentin.server.Server'
+    }
+    from sourceSets.main.output
+    dependsOn configurations.runtimeClasspath
+    configurations.runtimeClasspath.each { file ->
+        from zipTree(file)
+    }
+    archiveClassifier = 'GalacticMessenger-all.jar'
+}
+
+jar {
+    dependsOn clientJar, serverJar
+}
+
+clean {
+    delete file("../galactic_messenger_client.jar")
+    delete file("../galactic_messenger_server.jar")
+}
+
+test {
+    useJUnitPlatform()
+}
