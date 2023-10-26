@@ -3,7 +3,7 @@ package org.NilsCorentin.client;
 import java.io.IOException;
 import java.util.Scanner;
 
-import org.NilsCorentin.config.Config;
+import org.NilsCorentin.config.*;
 
 import static org.NilsCorentin.client.Client.*;
 
@@ -29,27 +29,12 @@ public class MainClient {
             String choice = scanner.nextLine();
             switch (choice) {
                 case "/login":
-                    String[] loginInfo = getUserInfo(scanner);
-                    if (loginInfo != null) {
-                        Client client = connectToServer(loginInfo);
-                        if (client != null) {
-                            startThreads(client);
-                        }
-                    }
+                    Auth.login();
                     validChoice = true;
                     break;
 
                 case "/register":
-                    String[] registerInfo = getUserInfo(scanner);
-                    if (registerInfo != null) {
-                        msg = "Registered successfully !";
-                        colorizedMsg = Config.colorizeText(msg, Config.GREEN);
-                        System.out.println(colorizedMsg);
-                        Client client = connectToServer(registerInfo);
-                        if (client != null) {
-                            startThreads(client);
-                        }
-                    }
+                    Auth.register();
                     validChoice = true;
                     break;
 

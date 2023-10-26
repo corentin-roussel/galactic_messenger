@@ -57,6 +57,8 @@ public class DbHandler {
 
 
 
+
+
     public void insertClientsInfosinTable(String clientUsername,String clientPassword){
         try {
             String hashedPassword = hashPassword(clientPassword);
@@ -68,5 +70,36 @@ public class DbHandler {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getHashedPassword(String username){
+        try {
+            String query = "SELECT password FROM clients WHERE username = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                String result = resultSet.getString("password");
+                return result;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public String getUserByName(String username){
+        try {
+            String query = "SELECT username FROM clients WHERE username = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return resultSet.getString("username");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 }
