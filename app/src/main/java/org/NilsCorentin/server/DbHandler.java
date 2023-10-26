@@ -60,15 +60,26 @@ public class DbHandler {
 
 
     public void insertClientsInfosinTable(String clientUsername,String clientPassword){
+        PreparedStatement preparedStatement = null;
+
         try {
             String hashedPassword = hashPassword(clientPassword);
             String query = "INSERT INTO clients (username, password) VALUES (?, ?)";
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, clientUsername);
             preparedStatement.setString(2, hashedPassword);
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Gérer l'exception de fermeture ici
+            }
         }
     }
 
@@ -78,6 +89,7 @@ public class DbHandler {
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
+
             if(resultSet.next()){
                 String result = resultSet.getString("password");
                 return result;
@@ -96,6 +108,7 @@ public class DbHandler {
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 return resultSet.getString("username");
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
