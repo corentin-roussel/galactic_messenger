@@ -1,6 +1,6 @@
 package org.NilsCorentin.server;
 
-import org.NilsCorentin.server.DbHandler;
+import org.NilsCorentin.server.*;
 import org.NilsCorentin.config.Config;
 
 import java.net.*;
@@ -69,10 +69,13 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         DbHandler db = new DbHandler();
+
         ServerSocket ss = new ServerSocket(Integer.parseInt(args[0]));
         Server server = new Server(ss);
         server.startServer();
         db.createTables();
+
+
 
 
 

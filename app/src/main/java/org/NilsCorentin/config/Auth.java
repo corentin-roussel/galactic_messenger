@@ -1,9 +1,11 @@
 package org.NilsCorentin.config;
 import org.NilsCorentin.client.Client;
-import org.NilsCorentin.config.Config;
+
+import org.NilsCorentin.server.ClientHandler;
 import org.NilsCorentin.server.DbHandler;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.net.Socket;
 import java.util.Scanner;
 
 import static org.NilsCorentin.client.Client.*;
@@ -60,6 +62,8 @@ public class Auth {
                     System.out.println(colorizedMsg + colorizedMsg2 + colorizedMsg3);
 
                     break;
+
+
 
                 default:
                     msg = "Invalid choice !";

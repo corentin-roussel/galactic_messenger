@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClientHandler implements Runnable{
 
@@ -44,7 +45,12 @@ public class ClientHandler implements Runnable{
             clientHandlers.add(this);
             String clientJoinedMsg = "INFOS: " + clientUsername + " à rejoint le chat";
             String colorizedClientJoinedMsg = color.colorizeText(clientJoinedMsg, Config.PURPLE);
+
+
+            List<String> connectedClients = ClientHandler.getConnectedClients();
+            String cooloredConnectedClients = color.colorizeText(connectedClients.toString(), Config.YELLOW);
             broadcastMessage(colorizedClientJoinedMsg);
+            broadcastMessage(Config.GREEN+ "connected users : "+ Config.RESET + cooloredConnectedClients);
 
         }catch (IOException err){
             closeEverything(socket, bufferedReader, bufferedWriter);
@@ -73,6 +79,15 @@ public class ClientHandler implements Runnable{
             }
         }
     }
+
+    public static List<String> getConnectedClients() {
+        List<String> connectedClients = new ArrayList<>();
+        for (ClientHandler clientHandler : clientHandlers) {
+            connectedClients.add(clientHandler.clientUsername);
+        }
+        return connectedClients;
+    }
+
 
 
 
@@ -114,8 +129,12 @@ public class ClientHandler implements Runnable{
         clientHandlers.remove(this);
         String clientLeftMsg = "INFOS: " + clientUsername + " à quitté le chat";
         String colorizedClientLeftMsg = color.colorizeText(clientLeftMsg, Config.PURPLE);
-        broadcastMessage(colorizedClientLeftMsg);
+        List<String> connectedClients = ClientHandler.getConnectedClients();
+        broadcastMessage(colorizedClientLeftMsg + " | " + connectedClients);
+
+
     }
+
 
 
 

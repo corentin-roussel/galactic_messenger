@@ -5,32 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e89ab6f3-76b4-44aa-b0e3-379b319b03f7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/477447b8-0452-41f8-b11b-eb45fb7d7398.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/477447b8-0452-41f8-b11b-eb45fb7d7398.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/app/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/app/src/main/java/org/NilsCorentin/client/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/app/src/main/java/org/NilsCorentin/client/MainClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/app/src/main/java/org/NilsCorentin/config/Config.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/app/src/main/java/org/NilsCorentin/server/ClientHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/app/src/main/java/org/NilsCorentin/server/DbHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/app/src/main/java/org/NilsCorentin/server/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/galactic_database.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/galactic_messenger_client.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/galactic_messenger_server.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/MainClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/MainClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galactic_messenger_client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/galactic_messenger_client.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galactic_messenger_server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/galactic_messenger_server.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +22,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
     <projectState path="$PROJECT_DIR$/chat">
       <ProjectState />
     </projectState>
@@ -64,6 +51,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -76,6 +66,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "nils",
     "node.js.detected.package.eslint": "true",
@@ -86,6 +77,21 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="chat" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="chat" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -97,6 +103,7 @@
       <workItem from="1698271073374" duration="43000" />
       <workItem from="1698275346351" duration="11000" />
       <workItem from="1698275562135" duration="104000" />
+      <workItem from="1698567302400" duration="3251000" />
     </task>
     <servers />
   </component>
