@@ -39,10 +39,6 @@ public class ClientHandler implements Runnable{
             this.socket = socket;
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.clientUsername = bufferedReader.readLine();
-            this.clientPassword = bufferedReader.readLine();
-            //db.insertClientsInfosinTable(clientUsername, clientPassword);
-            clientHandlers.add(this);
             String clientJoinedMsg = "INFOS: " + clientUsername + " à rejoint le chat";
             String colorizedClientJoinedMsg = color.colorizeText(clientJoinedMsg, Config.PURPLE);
 

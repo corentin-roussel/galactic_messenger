@@ -12,7 +12,7 @@ import static org.NilsCorentin.client.Client.*;
 
 public class Auth {
 
-    public static void init() {
+   /* public static void init() {
         String msg = " ";
         String colorizedMsg = " ";
         String appName = "Galactic_Messenger";
@@ -127,5 +127,5 @@ public class Auth {
                 validCred = false;
             }
         }
-    }
+    }*/
 }

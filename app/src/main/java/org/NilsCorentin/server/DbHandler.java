@@ -59,7 +59,7 @@ public class DbHandler {
 
 
 
-    public void insertClientsInfosinTable(String clientUsername,String clientPassword){
+    public synchronized  void insertClientsInfosinTable(String clientUsername,String clientPassword){
         PreparedStatement preparedStatement = null;
 
         try {

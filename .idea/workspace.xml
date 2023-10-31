@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e89ab6f3-76b4-44aa-b0e3-379b319b03f7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/MainClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/MainClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/DbHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/DbHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galactic_database.db" beforeDir="false" afterPath="$PROJECT_DIR$/galactic_database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galactic_messenger_client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/galactic_messenger_client.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galactic_messenger_server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/galactic_messenger_server.jar" afterDir="false" />
     </list>
@@ -62,21 +63,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "nils",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;nils&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="chat" />
@@ -103,7 +104,8 @@
       <workItem from="1698271073374" duration="43000" />
       <workItem from="1698275346351" duration="11000" />
       <workItem from="1698275562135" duration="104000" />
-      <workItem from="1698567302400" duration="3251000" />
+      <workItem from="1698567302400" duration="4046000" />
+      <workItem from="1698665765768" duration="19487000" />
     </task>
     <servers />
   </component>
