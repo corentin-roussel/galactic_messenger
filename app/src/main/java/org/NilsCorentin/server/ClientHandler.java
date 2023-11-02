@@ -3,12 +3,10 @@ package org.NilsCorentin.server;
 import org.NilsCorentin.config.Config;
 import java.io.*;
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import org.NilsCorentin.server.DbHandler;
+import org.sqlite.util.StringUtils;
+
+import java.util.*;
 
 public class ClientHandler implements Runnable{
 
@@ -17,6 +15,7 @@ public class ClientHandler implements Runnable{
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
 
+    private boolean isLoggedIn;
     private String clientUsername;
 
     private String clientPassword;
@@ -41,7 +40,7 @@ public class ClientHandler implements Runnable{
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.clientUsername = bufferedReader.readLine();
             this.clientPassword = bufferedReader.readLine();
-            //db.insertClientsInfosinTable(clientUsername, clientPassword);
+            this.isLoggedIn = true;
             clientHandlers.add(this);
             String clientJoinedMsg = "INFOS: " + clientUsername + " à rejoint le chat";
             String colorizedClientJoinedMsg = color.colorizeText(clientJoinedMsg, Config.PURPLE);
@@ -72,7 +71,13 @@ public class ClientHandler implements Runnable{
         while (socket.isConnected()){
             try {
                 messageFromClient = bufferedReader.readLine();
-                broadcastMessage(messageFromClient);
+                if(messageFromClient.contains("/")) {
+                    useCommand(messageFromClient);
+                }else {
+                    broadcastMessage(messageFromClient);
+                }
+
+
             }catch (IOException err){
                 closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
@@ -93,6 +98,30 @@ public class ClientHandler implements Runnable{
 
 
 
+    public void useCommand(String messageFromClient) throws IOException {
+
+        String[] action = messageFromClient.split(" ");
+        try{
+            switch(action[1]) {
+                case "/private_chat":
+                    sendRequestChat(messageFromClient);
+                break;
+                case "/accept":
+                case "/decline":
+                    answerRequestChat(messageFromClient);
+                break;
+                case "/exit":
+                    removeClientHandler();
+                    closeEverything(socket, bufferedReader, bufferedWriter);
+                break;
+                default:
+                    broadcastSelfMessage("List of available commands : /private_chat 'username' -> To send a private chat demand\n /accept 'username' -> Accept private chat\n /decline 'username' -> Decline private chat\n /exit -> Quitter \n");
+            }
+        }catch(IOException e) {
+            closeEverything(socket, bufferedReader, bufferedWriter);
+        }
+
+    }
 
 
 
@@ -100,9 +129,9 @@ public class ClientHandler implements Runnable{
         for(ClientHandler clientHandler : clientHandlers){
             try {
                 if (!clientHandler.clientUsername.equals(clientUsername)){
-                    clientHandler.bufferedWriter.write(messageToSend);
-                    clientHandler.bufferedWriter.newLine();
-                    clientHandler.bufferedWriter.flush();
+                        clientHandler.bufferedWriter.write(messageToSend);
+                        clientHandler.bufferedWriter.newLine();
+                        clientHandler.bufferedWriter.flush();
                 }
             }catch (IOException err){
                 closeEverything(socket, bufferedReader, bufferedWriter);
@@ -126,6 +155,7 @@ public class ClientHandler implements Runnable{
     }
 
     public void removeClientHandler(){
+        this.isLoggedIn = false;
         clientHandlers.remove(this);
         String clientLeftMsg = "INFOS: " + clientUsername + " à quitté le chat";
         String colorizedClientLeftMsg = color.colorizeText(clientLeftMsg, Config.PURPLE);
@@ -138,8 +168,66 @@ public class ClientHandler implements Runnable{
 
 
 
+    public void acceptPrivateChat(String username) {
+        for(ClientHandler client: clientHandlers) {
+            try {
+                if (username.equals(client.clientUsername) && client.isLoggedIn) {
+                    client.bufferedWriter.write(clientUsername +" accepted you're private chat");
+                    client.bufferedWriter.newLine();
+                    client.bufferedWriter.flush();
+                }
+            }catch (IOException e) {
+                closeEverything(socket, bufferedReader, bufferedWriter);
+            }
+        }
+    }
 
+    public void declinePrivateChat(String username) {
+        for(ClientHandler client: clientHandlers) {
+            try {
+                if (username.equals(client.clientUsername) && client.isLoggedIn) {
+                    client.bufferedWriter.write(clientUsername +" declined you're private chat");
+                    client.bufferedWriter.newLine();
+                    client.bufferedWriter.flush();
+                }
+            }catch (IOException e) {
+                closeEverything(socket, bufferedReader, bufferedWriter);
+            }
+        }
+    }
 
+    public void sendRequestChat(String messageChat) throws IOException {
+
+        String[] result = messageChat.split(" ");
+        String username = result[2].trim();
+
+        String choiceReceiver = "/accept \"" + clientUsername  + "\"" + " or " + "/decline \"" + clientUsername + "\"";
+        for(ClientHandler client: clientHandlers) {
+            try {
+                if (username.equals(client.clientUsername) && client.isLoggedIn) {
+                    client.bufferedWriter.write(choiceReceiver);
+                    client.bufferedWriter.newLine();
+                    client.bufferedWriter.flush();
+                }
+            }catch (IOException e) {
+                closeEverything(socket, bufferedReader, bufferedWriter);
+            }
+        }
+    }
+
+    public void answerRequestChat(String messageChat) throws IOException {
+        String[] result = messageChat.split(" ");
+        String username = result[2];
+
+        switch(result[1]) {
+            case "/accept":
+                acceptPrivateChat(username);
+            break;
+            case "/decline":
+                declinePrivateChat(username);
+            break;
+        }
+    }
 
 
 

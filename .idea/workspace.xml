@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e89ab6f3-76b4-44aa-b0e3-379b319b03f7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/galactic_messenger.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galactic_database.db" beforeDir="false" afterPath="$PROJECT_DIR$/galactic_database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galactic_messenger_client.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/galactic_messenger_server.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +33,12 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/app">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -60,28 +76,65 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "one__to__one",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/coren/Desktop/projets_ecoles/galactic_messenger/galactic_messenger_server.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="chat" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+  <component name="RunManager" selected="JAR Application.galactic_messenger_server.jar">
+    <configuration name="galactic_messenger [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="chat" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="galactic_messenger_client.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/galactic_messenger_client.jar" />
+      <method v="2" />
     </configuration>
+    <configuration name="galactic_messenger_server.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/galactic_messenger_server.jar" />
+      <option name="PROGRAM_PARAMETERS" value="6000" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.galactic_messenger [jar]" />
+      <item itemvalue="JAR Application.galactic_messenger_client.jar" />
+      <item itemvalue="JAR Application.galactic_messenger_server.jar" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JAR Application.galactic_messenger_server.jar" />
+        <item itemvalue="Gradle.galactic_messenger [jar]" />
+        <item itemvalue="JAR Application.galactic_messenger_client.jar" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -95,6 +148,11 @@
       <workItem from="1698275346351" duration="11000" />
       <workItem from="1698275562135" duration="104000" />
       <workItem from="1698567302400" duration="3251000" />
+      <workItem from="1698688697455" duration="8929000" />
+      <workItem from="1698698810966" duration="43000" />
+      <workItem from="1698840146394" duration="3622000" />
+      <workItem from="1698843972677" duration="1876000" />
+      <workItem from="1698946910915" duration="14739000" />
     </task>
     <servers />
   </component>

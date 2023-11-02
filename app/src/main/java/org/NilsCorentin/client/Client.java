@@ -3,6 +3,8 @@ package org.NilsCorentin.client;
 import org.NilsCorentin.server.ClientHandler;
 import org.NilsCorentin.config.Config;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.io.*;
 import java.net.InetAddress;
@@ -48,7 +50,7 @@ public class Client {
             Scanner scanner = new Scanner(System.in);
             while(socket.isConnected()){
                 String messageToSend = scanner.nextLine();
-                bufferedWriter.write(color.BLUE + username + color.RESET +": " + messageToSend);
+                bufferedWriter.write(Config.BLUE + username + Config.RESET +": " + messageToSend);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
@@ -120,10 +122,10 @@ public class Client {
     public static Client connectToServer(String[] userInfo) {
         try {
             Socket socket = new Socket("localhost", 6000);
-            Client client = new Client(socket, userInfo[0], userInfo[1]);
-            client.bufferedWriter.write(userInfo[0]);
-            client.bufferedWriter.newLine();
+            Client client = new Client(socket, userInfo[1], userInfo[2]);
             client.bufferedWriter.write(userInfo[1]);
+            client.bufferedWriter.newLine();
+            client.bufferedWriter.write(userInfo[2]);
             client.bufferedWriter.newLine();
             client.bufferedWriter.flush();
             return client;
@@ -140,6 +142,27 @@ public class Client {
         // Démarrer un thread pour envoyer des messages
         Thread sendThread = new Thread(client::sendMessage);
         sendThread.start();
+    }
+
+
+    public static void oneToOne(Client client) {
+
+    }
+
+    public static void sendInvite(Client client) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        String inputClient = scanner.nextLine();
+        client.bufferedWriter.write(client.username);
+        client.bufferedWriter.write(inputClient);
+    }
+
+    public static void clearScreen() {
+        try {
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            else
+                Runtime.getRuntime().exec("clear");
+        } catch (IOException | InterruptedException ex) {}
     }
 
 

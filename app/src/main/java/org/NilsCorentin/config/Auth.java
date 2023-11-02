@@ -6,6 +6,7 @@ import org.NilsCorentin.server.DbHandler;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static org.NilsCorentin.client.Client.*;
@@ -29,14 +30,16 @@ public class Auth {
             System.out.println(colorizedMsg);
 
             String choice = scanner.nextLine();
-            switch (choice) {
+            String[] words = choice.split(" ");
+            System.out.println(Arrays.toString(words));
+            switch (words[0]) {
                 case "/login":
-                    Auth.login();
+                    Auth.login(words);
                     validChoice = true;
                     break;
 
                 case "/register":
-                    Auth.register();
+                    Auth.register(words);
                     validChoice = true;
                     break;
 
@@ -75,24 +78,24 @@ public class Auth {
         }
     }
 
-    public static void login() {
+    public static void login(String[] infoLogin) {
         boolean validCred = false;
         DbHandler dbHandler = new DbHandler();
 
         while (!validCred) {
-            Scanner scanner = new Scanner(System.in);
-            String[] loginInfo = getUserInfo(scanner);
 
 
-            String hashedPswdfromDb = dbHandler.getHashedPassword(loginInfo[0]);
 
-            String user = dbHandler.getUserByName(loginInfo[0]);
+            String hashedPswdfromDb = dbHandler.getHashedPassword(infoLogin[1]);
+
+            String user = dbHandler.getUserByName(infoLogin[1]);
             if (user == null) {
                 System.out.println(Config.colorizeText("User doesn't exist", Config.RED));
+                init();
                 validCred = false;
-            }else if (hashedPswdfromDb != null && BCrypt.checkpw(loginInfo[1], hashedPswdfromDb)) {
+            }else if (hashedPswdfromDb != null && BCrypt.checkpw(infoLogin[2], hashedPswdfromDb)) {
                 System.out.println(Config.colorizeText("User logged in successfully!", Config.GREEN));
-                Client client = connectToServer(loginInfo);
+                Client client = connectToServer(infoLogin);
                 startThreads(client);
                 validCred = true;
             } else {
@@ -103,26 +106,23 @@ public class Auth {
         }
     }
 
-    public static void register() {
+    public static void register(String[] infoLogin) {
         boolean validCred = false;
         DbHandler dbHandler = new DbHandler();
 
         while (!validCred) {
-            Scanner scanner = new Scanner(System.in);
-            String[] loginInfo = getUserInfo(scanner);
-            if (dbHandler.getUserByName(loginInfo[0]) == null) {
-                System.out.println(loginInfo[0]);
-                System.out.println(loginInfo[1]);
-                dbHandler.insertClientsInfosinTable(loginInfo[0], loginInfo[1]);
+
+            if (dbHandler.getUserByName(infoLogin[1]) == null) {
+                System.out.println(infoLogin[1]);
+                System.out.println(infoLogin[2]);
+                dbHandler.insertClientsInfosinTable(infoLogin[1], infoLogin[2]);
 
                 System.out.println(Config.colorizeText("User created successfully!", Config.GREEN));
                 init();
-                //Client client = connectToServer(loginInfo);
-                //startThreads(client);
                 validCred = true;
             } else {
-                System.out.println(loginInfo[0]);
-                System.out.println(loginInfo[1]);
+                System.out.println(infoLogin[1]);
+                System.out.println(infoLogin[2]);
                 System.out.println(Config.colorizeText("User already exists!", Config.RED));
                 validCred = false;
             }
