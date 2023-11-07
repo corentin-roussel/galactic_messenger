@@ -110,12 +110,15 @@ public class ClientHandler implements Runnable{
                 case "/decline":
                     answerRequestChat(messageFromClient);
                 break;
+                case "/help":
+                    broadcastSelfMessage("List of available commands : /private_chat 'username' -> To send a private chat demand\n /accept 'username' -> Accept private chat\n /decline 'username' -> Decline private chat\n /exit -> Quitter \n");
+                break;
                 case "/exit":
                     removeClientHandler();
                     closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
                 default:
-                    broadcastSelfMessage("List of available commands : /private_chat 'username' -> To send a private chat demand\n /accept 'username' -> Accept private chat\n /decline 'username' -> Decline private chat\n /exit -> Quitter \n");
+                    broadcastMessage(messageFromClient);
             }
         }catch(IOException e) {
             closeEverything(socket, bufferedReader, bufferedWriter);
@@ -176,6 +179,7 @@ public class ClientHandler implements Runnable{
                     client.bufferedWriter.newLine();
                     client.bufferedWriter.flush();
                 }
+
             }catch (IOException e) {
                 closeEverything(socket, bufferedReader, bufferedWriter);
             }

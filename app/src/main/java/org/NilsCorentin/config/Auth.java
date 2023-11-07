@@ -6,6 +6,7 @@ import org.NilsCorentin.server.DbHandler;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.net.Socket;
+import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ import static org.NilsCorentin.client.Client.*;
 
 public class Auth {
 
-    public static void init() {
+    public static void init(String[] args) {
         String msg = " ";
         String colorizedMsg = " ";
         String appName = "Galactic_Messenger";
@@ -34,12 +35,12 @@ public class Auth {
             System.out.println(Arrays.toString(words));
             switch (words[0]) {
                 case "/login":
-                    Auth.login(words);
+                    Auth.login(words, args);
                     validChoice = true;
                     break;
 
                 case "/register":
-                    Auth.register(words);
+                    Auth.register(words, args);
                     validChoice = true;
                     break;
 
@@ -78,7 +79,7 @@ public class Auth {
         }
     }
 
-    public static void login(String[] infoLogin) {
+    public static void login(String[] infoLogin, String[] args) {
         boolean validCred = false;
         DbHandler dbHandler = new DbHandler();
 
@@ -91,22 +92,27 @@ public class Auth {
             String user = dbHandler.getUserByName(infoLogin[1]);
             if (user == null) {
                 System.out.println(Config.colorizeText("User doesn't exist", Config.RED));
-                init();
+                init(args);
                 validCred = false;
             }else if (hashedPswdfromDb != null && BCrypt.checkpw(infoLogin[2], hashedPswdfromDb)) {
-                System.out.println(Config.colorizeText("User logged in successfully!", Config.GREEN));
-                Client client = connectToServer(infoLogin);
+                Client client = connectToServer(infoLogin,args);
+                if(client == null) {
+                    System.out.println("Wrong ip or port number please be sure that you entered the right information");
+                    System.exit(0);
+                }
                 startThreads(client);
+                System.out.println(Config.colorizeText("User logged in successfully!", Config.GREEN));
                 validCred = true;
             } else {
                 System.out.println(Config.colorizeText("Invalid credentials" +
                         "", Config.RED));
+                init(args);
                 validCred = false;
             }
         }
     }
 
-    public static void register(String[] infoLogin) {
+    public static void register(String[] infoLogin, String[] args) {
         boolean validCred = false;
         DbHandler dbHandler = new DbHandler();
 
@@ -118,12 +124,13 @@ public class Auth {
                 dbHandler.insertClientsInfosinTable(infoLogin[1], infoLogin[2]);
 
                 System.out.println(Config.colorizeText("User created successfully!", Config.GREEN));
-                init();
+                init(args);
                 validCred = true;
             } else {
                 System.out.println(infoLogin[1]);
                 System.out.println(infoLogin[2]);
                 System.out.println(Config.colorizeText("User already exists!", Config.RED));
+                init(args);
                 validCred = false;
             }
         }

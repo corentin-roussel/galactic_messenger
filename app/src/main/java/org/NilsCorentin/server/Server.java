@@ -11,13 +11,6 @@ import java.net.InetAddress;
 
 public class Server {
 
-    private ServerSocket ss;
-
-
-    public Server(ServerSocket ss){
-
-        this.ss = ss;
-    }
 
 
 
@@ -26,12 +19,18 @@ public class Server {
 
 
 
-    public void startServer(){
+
+
+    public void startServer(String[] args){
         Config color = new Config();
 
         try {
+
             InetAddress ip = InetAddress.getLocalHost();
             String hostAddress = ip.getHostAddress();
+            InetSocketAddress  inetSocketAddress = new InetSocketAddress(hostAddress, Integer.parseInt(args[0]));
+            ServerSocket ss = new ServerSocket();
+            ss.bind(inetSocketAddress);
             String showHostAdress= "Adresse ip du serveur : " + hostAddress;
             System.out.println(color.colorizeText(showHostAdress, Config.WHITE));
 
@@ -69,15 +68,8 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         DbHandler db = new DbHandler();
-
-        ServerSocket ss = new ServerSocket(Integer.parseInt(args[0]));
-        Server server = new Server(ss);
-        server.startServer();
+        Server server = new Server();
+        server.startServer(args);
         db.createTables();
-
-
-
-
-
-    }}
+        }}
 
