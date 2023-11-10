@@ -11,11 +11,15 @@ import java.util.*;
 public class ClientHandler implements Runnable{
 
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>(); // Garde une trace de tout les clients connectés pour que tout le monde est accées aux messages
+
+    public static ArrayList<ClientHandler> privateChatters = new ArrayList<>();
+
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
 
     private boolean isLoggedIn;
+    private boolean isInPrivateChat = false;
     private String clientUsername;
 
     private String clientPassword;
@@ -42,6 +46,7 @@ public class ClientHandler implements Runnable{
             this.clientPassword = bufferedReader.readLine();
             this.isLoggedIn = true;
             clientHandlers.add(this);
+            isInPrivateChat = false;
             String clientJoinedMsg = "INFOS: " + clientUsername + " à rejoint le chat";
             String colorizedClientJoinedMsg = color.colorizeText(clientJoinedMsg, Config.PURPLE);
 
@@ -74,7 +79,11 @@ public class ClientHandler implements Runnable{
                 if(messageFromClient.contains("/")) {
                     useCommand(messageFromClient);
                 }else {
-                    broadcastMessage(messageFromClient);
+                    if (isInPrivateChat) {
+                        broadcastPrivateMessage(color.PURPLE+ "Private : " + messageFromClient);
+                    } else {
+                        broadcastMessage(color.BLUE + clientUsername + ": " + messageFromClient + color.RESET);
+                    }
                 }
 
 
@@ -110,12 +119,15 @@ public class ClientHandler implements Runnable{
                 case "/decline":
                     answerRequestChat(messageFromClient);
                 break;
+                case "/help":
+                    broadcastSelfMessage("List of available commands : /private_chat 'username' -> To send a private chat demand\n /accept 'username' -> Accept private chat\n /decline 'username' -> Decline private chat\n /exit -> Quitter \n");
+                break;
                 case "/exit":
                     removeClientHandler();
                     closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
                 default:
-                    broadcastSelfMessage("List of available commands : /private_chat 'username' -> To send a private chat demand\n /accept 'username' -> Accept private chat\n /decline 'username' -> Decline private chat\n /exit -> Quitter \n");
+                    broadcastMessage(messageFromClient);
             }
         }catch(IOException e) {
             closeEverything(socket, bufferedReader, bufferedWriter);
@@ -154,6 +166,17 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    public void broadcastPrivateMessage(String messageTosend){
+        for (ClientHandler participant : privateChatters) {
+            try {
+                participant.bufferedWriter.write(messageTosend);
+                participant.bufferedWriter.newLine();
+                participant.bufferedWriter.flush();
+            } catch (IOException err) {
+            }
+        }
+    }
+
     public void removeClientHandler(){
         this.isLoggedIn = false;
         clientHandlers.remove(this);
@@ -172,10 +195,17 @@ public class ClientHandler implements Runnable{
         for(ClientHandler client: clientHandlers) {
             try {
                 if (username.equals(client.clientUsername) && client.isLoggedIn) {
-                    client.bufferedWriter.write(clientUsername +" accepted you're private chat");
+                    client.bufferedWriter.write(clientUsername +" accepted you'r e private chat");
                     client.bufferedWriter.newLine();
                     client.bufferedWriter.flush();
+
+                    privateChatters.add(this);
+                    privateChatters.add(client);
+
+                    this.isInPrivateChat = true;
+                    client.isInPrivateChat = true;
                 }
+
             }catch (IOException e) {
                 closeEverything(socket, bufferedReader, bufferedWriter);
             }

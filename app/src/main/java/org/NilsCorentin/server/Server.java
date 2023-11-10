@@ -5,13 +5,17 @@ import org.NilsCorentin.config.Config;
 
 import java.net.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.io.*;
 import java.net.InetAddress;
+import java.util.List;
 
 public class Server {
 
     private ServerSocket ss;
+
+
 
 
     public Server(ServerSocket ss){
