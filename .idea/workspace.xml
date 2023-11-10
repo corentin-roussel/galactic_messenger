@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e89ab6f3-76b4-44aa-b0e3-379b319b03f7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/PrivateChat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/MainClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/MainClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galactic_messenger_client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/galactic_messenger_client.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galactic_messenger_server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/galactic_messenger_server.jar" afterDir="false" />
     </list>
@@ -67,28 +65,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;one__to__one&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/coren/Desktop/projets_ecoles/galactic_messenger/galactic_messenger_server.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "one__to__one",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/coren/Desktop/projets_ecoles/galactic_messenger/galactic_messenger_server.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="JAR Application.galactic_messenger_client.jar">
+}]]></component>
+  <component name="RunManager" selected="Gradle.galactic_messenger [jar]">
     <configuration name="galactic_messenger [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -130,9 +128,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.galactic_messenger_client.jar" />
-        <item itemvalue="JAR Application.galactic_messenger_server.jar" />
         <item itemvalue="Gradle.galactic_messenger [jar]" />
+        <item itemvalue="JAR Application.galactic_messenger_server.jar" />
+        <item itemvalue="JAR Application.galactic_messenger_client.jar" />
       </list>
     </recent_temporary>
   </component>
@@ -155,27 +153,15 @@
       <workItem from="1698946910915" duration="14739000" />
       <workItem from="1699259084490" duration="5636000" />
       <workItem from="1699285475336" duration="2178000" />
-      <workItem from="1699368985936" duration="6425000" />
+      <workItem from="1699368985936" duration="49826000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

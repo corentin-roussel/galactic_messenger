@@ -13,7 +13,13 @@ public class MainClient {
 
 
     public static void main(String[] args) {
-        Auth.init(args);
+        try{
+                Auth.init(args);
+        }catch(IndexOutOfBoundsException e) {
+            System.out.println("erreur: " + e);
+            System.out.println("Verify that you have entered the number port and ip when launching the client");
+        }
+
 
     }
 }

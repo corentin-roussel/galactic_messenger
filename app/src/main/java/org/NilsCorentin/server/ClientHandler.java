@@ -1,5 +1,6 @@
 package org.NilsCorentin.server;
 
+import org.NilsCorentin.client.Client;
 import org.NilsCorentin.config.Config;
 import java.io.*;
 import java.net.Socket;
@@ -7,23 +8,18 @@ import org.NilsCorentin.server.DbHandler;
 import org.sqlite.util.StringUtils;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 
 public class ClientHandler implements Runnable{
 
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>(); // Garde une trace de tout les clients connectés pour que tout le monde est accées aux messages
+    public static Map<String, PrivateChat> privateChats = new HashMap<>();
     private Socket socket;
-    private BufferedReader bufferedReader;
-    private BufferedWriter bufferedWriter;
-
+    public BufferedReader bufferedReader;
+    public BufferedWriter bufferedWriter;
     private boolean isLoggedIn;
     private String clientUsername;
-
     private String clientPassword;
-
-
-
-
-
 
     Config color = new Config();
 
@@ -78,6 +74,7 @@ public class ClientHandler implements Runnable{
                 }
 
 
+
             }catch (IOException err){
                 closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
@@ -115,13 +112,13 @@ public class ClientHandler implements Runnable{
                 break;
                 case "/exit":
                     removeClientHandler();
-                    closeEverything(socket, bufferedReader, bufferedWriter);
+                    closeEverything(this.socket, this.bufferedReader, this.bufferedWriter);
                 break;
                 default:
                     broadcastMessage(messageFromClient);
             }
         }catch(IOException e) {
-            closeEverything(socket, bufferedReader, bufferedWriter);
+            closeEverything(this.socket, this.bufferedReader, this.bufferedWriter);
         }
 
     }
@@ -140,6 +137,15 @@ public class ClientHandler implements Runnable{
                 closeEverything(socket, bufferedReader, bufferedWriter);
             }
         }
+
+    }
+
+    public void broadcastPrivateChat(String messageToSend) {
+
+        for(Map.Entry<String, PrivateChat> set : privateChats.entrySet()) {
+            
+        }
+
 
     }
 
@@ -164,26 +170,49 @@ public class ClientHandler implements Runnable{
         String colorizedClientLeftMsg = color.colorizeText(clientLeftMsg, Config.PURPLE);
         List<String> connectedClients = ClientHandler.getConnectedClients();
         broadcastMessage(colorizedClientLeftMsg + " | " + connectedClients);
-
-
     }
 
 
 
 
-    public void acceptPrivateChat(String username) {
+    public void acceptPrivateChat(String receiver, String sender) throws IOException {
+
+        ClientHandler participant1 = null;
+        ClientHandler participant2 = null;
+
         for(ClientHandler client: clientHandlers) {
             try {
-                if (username.equals(client.clientUsername) && client.isLoggedIn) {
+                if (sender.equals(client.clientUsername)) {
+                    client.bufferedWriter.write(clientUsername +" you've entered private_chat");
+                    client.bufferedWriter.newLine();
+                    client.bufferedWriter.flush();
+                    participant1 = client;
+
+                }
+                if (receiver.equals(client.clientUsername) && client.isLoggedIn) {
                     client.bufferedWriter.write(clientUsername +" accepted you're private chat");
                     client.bufferedWriter.newLine();
                     client.bufferedWriter.flush();
+                    participant2 = client;
+
                 }
 
+                String generateChatKey = generateChatKey(sender, receiver);
+
+                PrivateChat privateChat = new PrivateChat(participant1, participant2, new ArrayList<>());
+
+                privateChats.put(generateChatKey, privateChat);
+
+                clientHandlers.remove(participant1);
+                clientHandlers.remove(participant2);
             }catch (IOException e) {
                 closeEverything(socket, bufferedReader, bufferedWriter);
             }
         }
+    }
+
+    public String generateChatKey(String senderName , String receiverName) {
+        return senderName + "-" + receiverName;
     }
 
     public void declinePrivateChat(String username) {
@@ -205,7 +234,7 @@ public class ClientHandler implements Runnable{
         String[] result = messageChat.split(" ");
         String username = result[2].trim();
 
-        String choiceReceiver = "/accept \"" + clientUsername  + "\"" + " or " + "/decline \"" + clientUsername + "\"";
+        String choiceReceiver = " /accept \"" + clientUsername  + "\"" + " or " + "/decline \"" + clientUsername + "\"";
         for(ClientHandler client: clientHandlers) {
             try {
                 if (username.equals(client.clientUsername) && client.isLoggedIn) {
@@ -220,15 +249,17 @@ public class ClientHandler implements Runnable{
     }
 
     public void answerRequestChat(String messageChat) throws IOException {
-        String[] result = messageChat.split(" ");
-        String username = result[2];
+        String[] messageSplit = messageChat.split(" ");
+        String receiver = messageSplit[2];
+        String sender = messageSplit[0];
+        sender = sender.substring(0, sender.length() - 1).trim();
 
-        switch(result[1]) {
+        switch(messageSplit[1]) {
             case "/accept":
-                acceptPrivateChat(username);
+                acceptPrivateChat(receiver, sender);
             break;
             case "/decline":
-                declinePrivateChat(username);
+                declinePrivateChat(receiver);
             break;
         }
     }
@@ -255,6 +286,14 @@ public class ClientHandler implements Runnable{
     }
 
 
+    public static void clearScreen() {
+        try {
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            else
+                Runtime.getRuntime().exec("clear");
+        } catch (IOException | InterruptedException ex) {}
+    }
 
 
 
