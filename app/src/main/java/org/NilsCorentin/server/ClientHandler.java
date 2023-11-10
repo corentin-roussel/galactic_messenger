@@ -140,7 +140,7 @@ public class ClientHandler implements Runnable{
     public void broadcastMessage(String messageToSend){
         for(ClientHandler clientHandler : clientHandlers){
             try {
-                if (!clientHandler.clientUsername.equals(clientUsername)){
+                if (!clientHandler.clientUsername.equals(clientUsername) && !clientHandler.isInPrivateChat){
                         clientHandler.bufferedWriter.write(messageToSend);
                         clientHandler.bufferedWriter.newLine();
                         clientHandler.bufferedWriter.flush();
