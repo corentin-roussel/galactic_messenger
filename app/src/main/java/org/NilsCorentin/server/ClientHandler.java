@@ -3,8 +3,6 @@ package org.NilsCorentin.server;
 import org.NilsCorentin.config.Config;
 import java.io.*;
 import java.net.Socket;
-import org.NilsCorentin.server.DbHandler;
-import org.sqlite.util.StringUtils;
 
 import java.util.*;
 
@@ -13,6 +11,8 @@ public class ClientHandler implements Runnable{
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>(); // Garde une trace de tout les clients connectés pour que tout le monde est accées aux messages
 
     public static ArrayList<ClientHandler> privateChatters = new ArrayList<>();
+
+
 
     private Socket socket;
     private BufferedReader bufferedReader;
@@ -80,7 +80,7 @@ public class ClientHandler implements Runnable{
                     useCommand(messageFromClient);
                 }else {
                     if (isInPrivateChat) {
-                        broadcastPrivateMessage(color.PURPLE+ "Private : " + messageFromClient);
+                        broadcastPrivateMessage(color.YELLOW+ "Private : " + messageFromClient);
                     } else {
                         broadcastMessage(color.BLUE + clientUsername + ": " + messageFromClient + color.RESET);
                     }
@@ -113,8 +113,15 @@ public class ClientHandler implements Runnable{
         try{
             switch(action[1]) {
                 case "/private_chat":
-                    sendRequestChat(messageFromClient);
+                    if (privateChatters.size() >= 2) {
+                        broadcastSelfMessage(numbersOfUsersOverPassed());
+                    } else {
+                        sendRequestChat(messageFromClient);
+                    }
                 break;
+                case "/group_chat":
+                    sendRequestChat(messageFromClient);
+                    break;
                 case "/accept":
                 case "/decline":
                     answerRequestChat(messageFromClient);
@@ -194,6 +201,8 @@ public class ClientHandler implements Runnable{
 
 
 
+
+
     public void acceptPrivateChat(String username) {
         for(ClientHandler client: clientHandlers) {
             try {
@@ -215,6 +224,11 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    public String numbersOfUsersOverPassed(){
+
+        return "Sorry there is too many users in the private chat, please try to create a group chat";
+    }
+
     public void declinePrivateChat(String username) {
         for(ClientHandler client: clientHandlers) {
             try {
@@ -234,7 +248,8 @@ public class ClientHandler implements Runnable{
         String[] result = messageChat.split(" ");
         String username = result[2].trim();
 
-        String choiceReceiver = "/accept \"" + clientUsername  + "\"" + " or " + "/decline \"" + clientUsername + "\"";
+        String choiceReceiver = clientUsername +" Send you an invite to a private chat\n/accept "+ clientUsername +"\n"+"/decline" + clientUsername + "\n";
+
         for(ClientHandler client: clientHandlers) {
             try {
                 if (username.equals(client.clientUsername) && client.isLoggedIn) {
