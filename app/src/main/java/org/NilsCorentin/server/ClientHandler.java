@@ -126,6 +126,9 @@ public class ClientHandler implements Runnable{
                     removeClientHandler();
                     closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
+                case "/who":
+                    List<String> connectedClients = ClientHandler.getConnectedClients();
+                    broadcastSelfMessage(connectedClients.toString());
                 default:
                     broadcastMessage(messageFromClient);
             }
