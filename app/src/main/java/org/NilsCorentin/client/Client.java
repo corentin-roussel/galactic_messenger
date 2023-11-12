@@ -1,13 +1,11 @@
 package org.NilsCorentin.client;
 
-import org.NilsCorentin.server.ClientHandler;
+
 import org.NilsCorentin.config.Config;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Hashtable;
+
 import java.io.*;
-import java.net.InetAddress;
+
 import java.util.Scanner;
 
 public class Client {
