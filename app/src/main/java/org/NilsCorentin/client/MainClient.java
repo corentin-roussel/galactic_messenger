@@ -13,7 +13,11 @@ public class MainClient {
 
 
     public static void main(String[] args) {
-        Auth.init();
+        if (args.length != 2) {
+            System.out.println("Usage: java -jar client.jar <ip> <port>");
+            System.exit(1);
+        }
+        Auth.init(Integer.parseInt(args[1]));
 
     }
 }

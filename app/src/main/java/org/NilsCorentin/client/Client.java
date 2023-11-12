@@ -117,9 +117,9 @@ public class Client {
         return new String[]{username, password};
     }
 
-    public static Client connectToServer(String[] userInfo) {
+    public static Client connectToServer(String[] userInfo, int port) {
         try {
-            Socket socket = new Socket("localhost", 6000);
+            Socket socket = new Socket("localhost", port);
             Client client = new Client(socket, userInfo[1], userInfo[2]);
             client.bufferedWriter.write(userInfo[1]);
             client.bufferedWriter.newLine();
