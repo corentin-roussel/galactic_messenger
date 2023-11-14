@@ -73,11 +73,15 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         DbHandler db = new DbHandler();
+        try {
+            ServerSocket ss = new ServerSocket(Integer.parseInt(args[0]));
+            Server server = new Server(ss);
+            server.startServer();
+            db.createTables();
+        } catch (Exception e) {
+            System.out.println("Usage: java -jar galactic_messenger_server.jar <port>");
+        }
 
-        ServerSocket ss = new ServerSocket(Integer.parseInt(args[0]));
-        Server server = new Server(ss);
-        server.startServer();
-        db.createTables();
 
 
 
