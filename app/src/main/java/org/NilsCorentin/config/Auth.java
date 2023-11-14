@@ -13,7 +13,7 @@ import static org.NilsCorentin.client.Client.*;
 
 public class Auth {
 
-    public static void init() {
+    public static void init(int port) {
         String msg = " ";
         String colorizedMsg = " ";
         String appName = "Galactic_Messenger";
@@ -34,12 +34,12 @@ public class Auth {
             System.out.println(Arrays.toString(words));
             switch (words[0]) {
                 case "/login":
-                    Auth.login(words);
+                    Auth.login(words, port);
                     validChoice = true;
                     break;
 
                 case "/register":
-                    Auth.register(words);
+                    Auth.register(words, port);
                     validChoice = true;
                     break;
 
@@ -78,7 +78,7 @@ public class Auth {
         }
     }
 
-    public static void login(String[] infoLogin) {
+    public static void login(String[] infoLogin, int port) {
         boolean validCred = false;
         DbHandler dbHandler = new DbHandler();
 
@@ -91,11 +91,13 @@ public class Auth {
             String user = dbHandler.getUserByName(infoLogin[1]);
             if (user == null) {
                 System.out.println(Config.colorizeText("User doesn't exist", Config.RED));
-                init();
+
+                init(port);
                 validCred = false;
+
             }else if (hashedPswdfromDb != null && BCrypt.checkpw(infoLogin[2], hashedPswdfromDb)) {
                 System.out.println(Config.colorizeText("User logged in successfully!", Config.GREEN));
-                Client client = connectToServer(infoLogin);
+                Client client = connectToServer(infoLogin,port);
                 startThreads(client);
                 validCred = true;
             } else {
@@ -106,7 +108,8 @@ public class Auth {
         }
     }
 
-    public static void register(String[] infoLogin) {
+    public synchronized static void register(String[] infoLogin, int port) {
+
         boolean validCred = false;
         DbHandler dbHandler = new DbHandler();
 
@@ -115,10 +118,13 @@ public class Auth {
             if (dbHandler.getUserByName(infoLogin[1]) == null) {
                 System.out.println(infoLogin[1]);
                 System.out.println(infoLogin[2]);
+                System.out.println("Before insert: " + Thread.currentThread().getName());
                 dbHandler.insertClientsInfosinTable(infoLogin[1], infoLogin[2]);
+                System.out.println("After insert: " + Thread.currentThread().getName());
+
 
                 System.out.println(Config.colorizeText("User created successfully!", Config.GREEN));
-                init();
+                init(port);
                 validCred = true;
             } else {
                 System.out.println(infoLogin[1]);
