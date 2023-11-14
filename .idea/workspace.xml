@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e89ab6f3-76b4-44aa-b0e3-379b319b03f7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/MainClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/client/MainClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/org/NilsCorentin/config/Auth.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galactic_messenger_client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/galactic_messenger_client.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galactic_messenger_server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/galactic_messenger_server.jar" afterDir="false" />
-    </list>
+    <list default="true" id="e89ab6f3-76b4-44aa-b0e3-379b319b03f7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,7 +68,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging nils__one__to__one",
+    "git-widget-placeholder": "final__branch",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/coren/Desktop/projets_ecoles/galactic_messenger/galactic_messenger_server.jar",
     "node.js.detected.package.eslint": "true",
